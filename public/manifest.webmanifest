@@ -1,0 +1,29 @@
+{
+  "name": "TankCopilot – Tankbuch & Verbrauchsplaner",
+  "short_name": "TankCopilot",
+  "description": "Tankbuch & Verbrauchsplaner für Autofahrer",
+  "version": "1.2.3",
+  "start_url": "/TankCopilot/app/",
+  "scope": "/TankCopilot/app/",
+  "display": "standalone",
+  "background_color": "#E0F7F7",
+  "theme_color": "#00A8A8",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/TankCopilot/app/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/TankCopilot/app/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "travel"],
+  "lang": "de"
+}
+

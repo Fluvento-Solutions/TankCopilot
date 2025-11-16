@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TankCopilot – Die intelligente PWA für digitales Tankbuch und optimale Tankstellenwahl. 100% Datenschutz, offline-fähig, kostenlos.">
+  <meta name="keywords" content="Tankbuch, Spritpreise, Verbrauchsberechnung, PWA, Tankstellen, Autofahrer">
+  <meta name="author" content="Bastian Flügel">
+  <title>TankCopilot – Intelligentes Tankbuch & Verbrauchsplaner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-to-main">Zum Hauptinhalt springen</a>
+
+  <!-- Hero Section -->
+  <section class="hero section">
+    <div class="container">
+      <h1>TankCopilot</h1>
+      <p class="hero-subtitle">
+        Die intelligente Progressive Web App für Autofahrer: Digitales Tankbuch, 
+        intelligente Verbrauchsberechnung und optimale Tankstellenwahl – 
+        <strong>100% Datenschutz, offline-fähig, kostenlos</strong>
+      </p>
+      <div class="hero-cta">
+        <a href="/TankCopilot/app/" class="btn btn-primary btn-accent" style="font-size: var(--fs-lg); padding: var(--space-4) var(--space-6);" aria-label="TankCopilot App jetzt kostenlos nutzen">
+          Jetzt kostenlos nutzen <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem-Lösung Section -->
+  <section class="section" id="main-content">
+    <div class="container">
+      <h2>Das Problem kennen Sie sicher</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">❌</span> Ohne TankCopilot</h3>
+          <ul class="feature-list">
+            <li>Unübersichtliche Tankkosten – keine klare Übersicht</li>
+            <li>Keine echte Verbrauchsberechnung – nur Schätzwerte</li>
+            <li>Unwissenheit über günstigste Tankstellen in der Nähe</li>
+            <li>Keine Ersparnis-Berechnung bei längeren Fahrten</li>
+            <li>Daten in der Cloud – Datenschutz-Bedenken</li>
+            <li>Abhängigkeit von App-Stores und Updates</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">✅</span> Mit TankCopilot</h3>
+          <ul class="feature-list">
+            <li>Digitale Tankbuchführung – alle Tankungen im Überblick</li>
+            <li>Realistische Verbrauchsberechnung basierend auf allen Tankungen</li>
+            <li>Intelligente Tankstellensuche mit aktuellen Preisen</li>
+            <li>Ersparnis-Berechnung inkl. Fahrtkosten</li>
+            <li>100% lokale Speicherung – keine Cloud, kein Tracking</li>
+            <li>PWA – installierbar ohne App-Store, funktioniert offline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features & Vorteile -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center">Warum TankCopilot einzigartig ist</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">📝</span> Digitales Tankbuch</h3>
+          <p class="card-text">
+            Erfassen Sie alle Tankvorgänge – nicht nur Volltankungen. 
+            TankCopilot berechnet den Verbrauch realistisch basierend auf 
+            allen verfügbaren Daten.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">📊</span> Intelligente Verbrauchsberechnung</h3>
+          <p class="card-text">
+            Keine einfachen Durchschnitte: TankCopilot verwendet einen 
+            km-gewichteten Algorithmus, der auch Teilbetankungen korrekt 
+            berücksichtigt.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">📍</span> Tankstellensuche mit Ersparnis</h3>
+          <p class="card-text">
+            Finden Sie die günstigste Tankstelle in Ihrer Nähe. 
+            TankCopilot berechnet automatisch, ob sich die Fahrt lohnt – 
+            inklusive Fahrtkosten.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">🔒</span> 100% Datenschutz</h3>
+          <p class="card-text">
+            Alle Daten bleiben auf Ihrem Gerät. Keine Cloud, kein Tracking, 
+            keine Weitergabe an Dritte. DSGVO-konform von Grund auf.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">📱</span> Offline-Funktionalität</h3>
+          <p class="card-text">
+            Als Progressive Web App funktioniert TankCopilot auch ohne 
+            Internetverbindung. Ihre Daten sind immer verfügbar.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">🚗</span> Mehrere Fahrzeuge</h3>
+          <p class="card-text">
+            Verwalten Sie mehrere Fahrzeuge mit individuellen Einstellungen. 
+            Jedes Fahrzeug hat seine eigene Verbrauchsstatistik.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einzigartigkeit -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center">Was macht TankCopilot besonders?</h2>
+      <div class="card" style="max-width: 900px; margin: 0 auto;">
+        <ul class="feature-list">
+          <li>
+            <strong>Realistische Verbrauchsberechnung:</strong> 
+            Während andere Apps nur Volltankungen berücksichtigen, 
+            analysiert TankCopilot alle Tankvorgänge für präzise Ergebnisse.
+          </li>
+          <li>
+            <strong>Kostenoptimierung durch intelligente Tankstellenwahl:</strong> 
+            Nicht nur der Preis zählt – TankCopilot berücksichtigt auch 
+            die Fahrtkosten und zeigt Ihnen, ob sich die Fahrt wirklich lohnt.
+          </li>
+          <li>
+            <strong>Keine Cloud, keine Tracking-Daten:</strong> 
+            Ihre Daten gehören Ihnen. Alles wird lokal in Ihrem Browser 
+            gespeichert (IndexedDB). Keine Server, keine Analytics, keine Cookies.
+          </li>
+          <li>
+            <strong>PWA – kein App-Store nötig:</strong> 
+            Installieren Sie TankCopilot direkt aus dem Browser. 
+            Keine Wartezeiten, keine Store-Gebühren, sofort verfügbar.
+          </li>
+          <li>
+            <strong>DSGVO-konform von Grund auf:</strong> 
+            Datenexport, Datenlöschung, volle Kontrolle – alle 
+            DSGVO-Rechte sind integriert.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center">Installation – So einfach geht's</h2>
+      
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">📱</span> iOS (iPhone/iPad)</h3>
+          <ol class="install-steps">
+            <li>
+              Öffnen Sie Safari und besuchen Sie 
+              <a href="/TankCopilot/app/" aria-label="TankCopilot App aufrufen">fluvento.de/TankCopilot/app/</a>
+            </li>
+            <li>
+              Tippen Sie auf das <strong>Teilen-Symbol</strong> 
+              (Quadrat mit Pfeil nach oben)
+            </li>
+            <li>
+              Wählen Sie <strong>"Zum Home-Bildschirm"</strong> 
+              aus dem Menü
+            </li>
+            <li>
+              Bestätigen Sie mit <strong>"Hinzufügen"</strong>
+            </li>
+            <li>
+              Die App erscheint jetzt auf Ihrem Home-Bildschirm 
+              und funktioniert wie eine native App
+            </li>
+          </ol>
+          <p class="text-muted" style="margin-top: var(--space-4);">
+            <strong>Hinweis:</strong> Die Installation funktioniert nur in Safari, 
+            nicht in Chrome oder anderen Browsern auf iOS.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title"><span aria-hidden="true">🤖</span> Android</h3>
+          <ol class="install-steps">
+            <li>
+              Öffnen Sie Chrome (oder einen anderen modernen Browser) 
+              und besuchen Sie 
+              <a href="/TankCopilot/app/" aria-label="TankCopilot App aufrufen">fluvento.de/TankCopilot/app/</a>
+            </li>
+            <li>
+              Tippen Sie auf das <strong>Menü-Symbol</strong> 
+              (drei Punkte oben rechts)
+            </li>
+            <li>
+              Wählen Sie <strong>"Zum Startbildschirm hinzufügen"</strong> 
+              oder <strong>"App installieren"</strong>
+            </li>
+            <li>
+              Bestätigen Sie die Installation im Popup
+            </li>
+            <li>
+              Die App erscheint auf Ihrem Startbildschirm und 
+              kann wie eine native App genutzt werden
+            </li>
+          </ol>
+          <p class="text-muted" style="margin-top: var(--space-4);">
+            <strong>Hinweis:</strong> Auf manchen Android-Geräten müssen Sie 
+            möglicherweise die Installation von unbekannten Quellen erlauben.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" style="max-width: 600px; margin: var(--space-6) auto 0;">
+        <h3 class="card-title"><span aria-hidden="true">💻</span> Desktop (Windows/Mac/Linux)</h3>
+        <p class="card-text">
+          Öffnen Sie TankCopilot in Ihrem Browser. Die PWA funktioniert auch 
+          ohne Installation. Optional können Sie in Chrome/Edge über das 
+          Menü "App installieren" wählen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Troubleshooting -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center">Häufige Probleme & Lösungen</h2>
+      
+      <div class="troubleshooting-item">
+        <h4>Standort wird nicht erkannt</h4>
+        <p>
+          <strong>Problem:</strong> Die App kann Ihren Standort nicht ermitteln.
+        </p>
+        <p>
+          <strong>Lösung:</strong>
+        </p>
+        <ul>
+          <li>Prüfen Sie die Standortberechtigungen in den Einstellungen der App</li>
+          <li>Auf iOS: Einstellungen → Safari → Standortdienste aktivieren</li>
+          <li>Auf Android: Einstellungen → Apps → TankCopilot → Berechtigungen → Standort erlauben</li>
+          <li>Stellen Sie sicher, dass GPS aktiviert ist</li>
+          <li>Versuchen Sie es im Freien für bessere GPS-Genauigkeit</li>
+        </ul>
+      </div>
+
+      <div class="troubleshooting-item">
+        <h4>App zeigt keine Tankstellen an</h4>
+        <p>
+          <strong>Problem:</strong> Die Tankstellensuche liefert keine Ergebnisse.
+        </p>
+        <p>
+          <strong>Lösung:</strong>
+        </p>
+        <ul>
+          <li>Prüfen Sie Ihre Internetverbindung</li>
+          <li>Warten Sie einige Sekunden – die API-Abfrage kann etwas dauern</li>
+          <li>Versuchen Sie, den Standort manuell einzugeben</li>
+          <li>Laden Sie die Seite neu (Strg+F5 / Cmd+Shift+R)</li>
+        </ul>
+      </div>
+
+      <div class="troubleshooting-item">
+        <h4>App aktualisiert sich nicht</h4>
+        <p>
+          <strong>Problem:</strong> Nach einem Update werden alte Versionen angezeigt.
+        </p>
+        <p>
+          <strong>Lösung:</strong>
+        </p>
+        <ul>
+          <li>Löschen Sie den Browser-Cache und Service Worker</li>
+          <li>Chrome/Edge: Einstellungen → Datenschutz → Browserdaten löschen → "Gecachte Bilder und Dateien"</li>
+          <li>Safari: Einstellungen → Safari → Verlauf und Websitedaten löschen</li>
+          <li>Laden Sie die Seite neu (Strg+F5 / Cmd+Shift+R)</li>
+          <li>Falls das nicht hilft: Deinstallieren und neu installieren</li>
+        </ul>
+      </div>
+
+      <div class="troubleshooting-item">
+        <h4>Installation funktioniert nicht (iOS)</h4>
+        <p>
+          <strong>Problem:</strong> "Zum Home-Bildschirm" erscheint nicht im Safari-Menü.
+        </p>
+        <p>
+          <strong>Lösung:</strong>
+        </p>
+        <ul>
+          <li>Stellen Sie sicher, dass Sie Safari verwenden (nicht Chrome oder Firefox)</li>
+          <li>Die Funktion ist nur in Safari verfügbar</li>
+          <li>Prüfen Sie, ob die Seite vollständig geladen ist</li>
+          <li>Versuchen Sie es in einem privaten Tab erneut</li>
+        </ul>
+      </div>
+
+      <div class="troubleshooting-item">
+        <h4>Installation funktioniert nicht (Android)</h4>
+        <p>
+          <strong>Problem:</strong> "Zum Startbildschirm hinzufügen" erscheint nicht.
+        </p>
+        <p>
+          <strong>Lösung:</strong>
+        </p>
+        <ul>
+          <li>Verwenden Sie Chrome oder einen anderen modernen Browser</li>
+          <li>Prüfen Sie, ob die Seite vollständig geladen ist</li>
+          <li>Manche Browser zeigen die Option erst nach mehrmaligem Besuch</li>
+          <li>Prüfen Sie die Browser-Einstellungen für PWA-Installation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap / Ausblick -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center">Ausblick: Die Zukunft von TankCopilot</h2>
+      <p class="text-center text-muted" style="max-width: 800px; margin: 0 auto var(--space-6);">
+        TankCopilot wird kontinuierlich weiterentwickelt. 
+        Geplante Features für die native App-Version:
+      </p>
+      
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">🚀</span> Native App (iOS & Android)</h4>
+        <p>
+          Eine vollständige native App mit erweiterten Funktionen und 
+          noch besserer Performance. Verfügbar in den App Stores.
+        </p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">🚗</span> Automatische Fahrtenerkennung</h4>
+        <p>
+          Die App erkennt automatisch, wann Sie eine Fahrt antreten. 
+          Keine manuelle Eingabe mehr nötig – alles läuft im Hintergrund.
+        </p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">📊</span> Erweiterte Verbrauchsanalyse</h4>
+        <p>
+          Detaillierte Statistiken über Ihren Verbrauch: 
+          Stadt vs. Landstraße, verschiedene Strecken, 
+          saisonale Schwankungen und mehr.
+        </p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">🎯</span> Fahrstil-Empfehlungen</h4>
+        <p>
+          Personalisierte Tipps zur Verbrauchsoptimierung basierend auf 
+          Ihren Fahrgewohnheiten. Sparen Sie Geld durch effizienteres Fahren.
+        </p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">⏰</span> Intelligente Tankzeit-Empfehlungen</h4>
+        <p>
+          Die App analysiert historische Preisdaten und empfiehlt Ihnen 
+          den optimalen Zeitpunkt zum Tanken. Sparen Sie durch 
+          strategisches Timing.
+        </p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">🔔</span> Preisalarme</h4>
+        <p>
+          Erhalten Sie Benachrichtigungen, wenn der Spritpreis an Ihrer 
+          bevorzugten Tankstelle besonders günstig ist.
+        </p>
+      </div>
+
+      <div class="roadmap-item">
+        <h4><span aria-hidden="true">📈</span> Langzeit-Statistiken</h4>
+        <p>
+          Umfassende Auswertungen über Monate und Jahre: 
+          Entwicklung Ihrer Tankkosten, Verbrauchstrends, 
+          Ersparnisse durch optimale Tankstellenwahl.
+        </p>
+      </div>
+
+      <div class="card" style="max-width: 600px; margin: var(--space-6) auto 0; text-align: center;">
+        <p class="card-text">
+          <strong>Bleiben Sie auf dem Laufenden:</strong> 
+          Die PWA-Version wird kontinuierlich mit neuen Features erweitert. 
+          Viele Funktionen sind bereits jetzt verfügbar!
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section">
+    <div class="container text-center">
+      <h2>Bereit, Ihre Tankkosten zu optimieren?</h2>
+      <p class="text-muted" style="font-size: var(--fs-lg); margin-bottom: var(--space-6);">
+        Installieren Sie TankCopilot jetzt kostenlos – 
+        keine Registrierung, keine versteckten Kosten, 100% Datenschutz.
+      </p>
+      <a href="/TankCopilot/app/" class="btn btn-primary btn-accent" style="font-size: var(--fs-lg); padding: var(--space-4) var(--space-6);" aria-label="TankCopilot App jetzt nutzen">
+        Jetzt TankCopilot nutzen <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p style="margin-bottom: var(--space-4);">
+        <strong>TankCopilot</strong> – Intelligentes Tankbuch & Verbrauchsplaner
+      </p>
+      <p style="margin-bottom: var(--space-4);">
+        Betreiber: <strong>Bastian Flügel</strong>
+      </p>
+      <p>
+        <a href="/impressum/" aria-label="Zum Impressum">Impressum</a> | 
+        <a href="/TankCopilot/app/" aria-label="Zur TankCopilot App">Zur App</a>
+      </p>
+      <p style="margin-top: var(--space-4); font-size: var(--fs-sm); opacity: 0.8;">
+        © 2025 TankCopilot. Alle Rechte vorbehalten.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
+

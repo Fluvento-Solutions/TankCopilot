@@ -1,0 +1,14 @@
+# MIME-Types für PWA
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType application/json .webmanifest
+</IfModule>
+
+# Cache-Control für Manifest
+<IfModule mod_headers.c>
+  <FilesMatch "\.webmanifest$">
+    Header set Cache-Control "public, max-age=3600"
+    Header set Content-Type "application/manifest+json"
+  </FilesMatch>
+</IfModule>
+
