@@ -2,7 +2,7 @@
   "name": "TankCopilot – Tankbuch & Verbrauchsplaner",
   "short_name": "TankCopilot",
   "description": "Tankbuch & Verbrauchsplaner für Autofahrer",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "start_url": "/TankCopilot/app/",
   "scope": "/TankCopilot/app/",
   "display": "standalone",
@@ -23,7 +23,9 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["utilities", "travel"],
+  "categories": [
+    "utilities",
+    "travel"
+  ],
   "lang": "de"
 }
-

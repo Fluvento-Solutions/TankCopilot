@@ -7,6 +7,13 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 **Entwicklungszeitraum**: 14. November 2025 (Freitag, 17:00-22:00 Uhr) bis 17. November 2025 (Montag, 11:30 Uhr)
 
+## [1.3.2] - 2025-11-17 12:53
+
+### Geändert
+- Version 1.3.1: GPS-Tracking optimiert, Live-Updates, Dezimaltrennzeichen-Normalisierung
+- Initial commit: TankCopilot v1.2.3 - PWA für Tankbuch & Verbrauchsplaner
+
+
 ## [1.3.1] - 2025-11-17 11:30
 
 ### Geändert
@@ -280,6 +287,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **Behoben**: Bug-Fixes
 - **Sicherheit**: Sicherheitsrelevante Änderungen
 
+[1.3.2]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.3.0...v1.3.1
 [1.3.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.2.3...v1.3.0
 [1.2.3]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.2.1...v1.2.3
