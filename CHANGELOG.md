@@ -7,19 +7,35 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 **Entwicklungszeitraum**: 14. November 2025 (Freitag, 17:00-22:00 Uhr) bis 17. November 2025 (Montag, 11:30 Uhr)
 
-## [1.4.0] - 2025-11-17 13:21
+## [1.4.1] - 2025-11-17 15:35
 
 ### Geändert
+- Version 1.4.0: Nebenversion Update
 - Version 1.3.2: Patch Update
 - Version 1.3.1: GPS-Tracking optimiert, Live-Updates, Dezimaltrennzeichen-Normalisierung
 - Initial commit: TankCopilot v1.2.3 - PWA für Tankbuch & Verbrauchsplaner
 
 
+## [1.4.0] - 2025-11-17 13:21
+
+### Hinzugefügt
+- Version Bump Script (`scripts/version-bump.js`) für automatisierte Versionsverwaltung
+- Automatische CHANGELOG-Generierung aus Git-Commits
+- Versionsanzeige in den Einstellungen
+
+### Geändert
+- Titlebar auf 100vw Breite gesetzt (margin: 0)
+- Doppelte Überschriften in allen Views entfernt (View-Namen nur noch in Titlebar)
+- Empty States in allen Views vereinheitlicht mit view-spezifischen Beschreibungen
+- Button "Fahrzeug hinzufügen" in allen Empty States mit konsistentem Styling
+- Header-Button in VehiclesView nur sichtbar wenn bereits Fahrzeuge vorhanden sind
+
 ## [1.3.2] - 2025-11-17 12:53
 
 ### Geändert
-- Version 1.3.1: GPS-Tracking optimiert, Live-Updates, Dezimaltrennzeichen-Normalisierung
-- Initial commit: TankCopilot v1.2.3 - PWA für Tankbuch & Verbrauchsplaner
+- Titlebar: Margin auf 0 gesetzt, Padding bleibt unverändert
+- Empty States für "Fahrten" und "Fahrzeuge" mit Beschreibungen ergänzt
+- Alle Empty States haben jetzt die gleiche Struktur und view-spezifische Beschreibungen
 
 
 ## [1.3.1] - 2025-11-17 11:30
@@ -295,6 +311,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **Behoben**: Bug-Fixes
 - **Sicherheit**: Sicherheitsrelevante Änderungen
 
+[1.4.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.3.2...v1.4.0
 [1.3.2]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.3.1...v1.3.2
 [1.3.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.3.0...v1.3.1

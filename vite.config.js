@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       // Version für Cache-Invalidierung - erhöhen bei Updates
-      version: '1.4.0',
+      version: '1.4.1',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
         // WICHTIG: base path für Service Worker
@@ -21,7 +21,7 @@ export default defineConfig({
             urlPattern: /^https?:\/\/.*\/api\/.*/i,
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'api-cache-v1.4.0', // Version im Cache-Namen für Invalidation
+              cacheName: 'api-cache-v1.4.1', // Version im Cache-Namen für Invalidation
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 // Nur 1 Minute Cache für API-Calls

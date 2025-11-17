@@ -2,7 +2,7 @@
   "name": "TankCopilot – Tankbuch & Verbrauchsplaner",
   "short_name": "TankCopilot",
   "description": "Tankbuch & Verbrauchsplaner für Autofahrer",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "start_url": "/TankCopilot/app/",
   "scope": "/TankCopilot/app/",
   "display": "standalone",

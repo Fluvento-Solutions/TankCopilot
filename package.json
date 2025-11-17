@@ -1,6 +1,6 @@
 {
   "name": "tankcopilot",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "type": "module",
   "description": "TankCopilot - Tankbuch & Verbrauchsplaner PWA",
   "scripts": {
