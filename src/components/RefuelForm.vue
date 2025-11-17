@@ -53,12 +53,11 @@
       <div class="form-group">
         <label class="form-label">Getankte Liter</label>
         <input
-          v-model.number="formData.liters"
-          type="number"
+          v-model="formData.liters"
+          type="text"
           class="form-input"
-          placeholder="z.B. 45.5"
-          min="0"
-          step="0.1"
+          placeholder="z.B. 45.5 oder 45,5"
+          @input="handleLitersInput"
           required
         />
       </div>
@@ -89,12 +88,11 @@
       <div class="form-group">
         <label class="form-label">Gesamtpreis ({{ currency }})</label>
         <input
-          v-model.number="formData.totalPrice"
-          type="number"
+          v-model="formData.totalPrice"
+          type="text"
           class="form-input"
           placeholder="Wird automatisch berechnet"
-          min="0"
-          step="0.01"
+          @input="handleTotalPriceInput"
         />
         <small class="form-hint">Wird automatisch aus Liter × Preis berechnet</small>
       </div>
@@ -135,6 +133,7 @@
 import { ref, watch, computed } from 'vue'
 import { upsertRefuel, getRefuelsByVehicleId } from '../services/storageService'
 import { loadSettings } from '../services/storageService'
+import { parseDecimal, normalizeDecimalInput } from '../utils/numberUtils'
 
 const props = defineProps({
   vehicles: {
@@ -280,9 +279,35 @@ watch(() => formData.value.vehicleId, async (newVehicleId) => {
   }
 }, { immediate: true })
 
+function handleLitersInput(event) {
+  const value = normalizeDecimalInput(event.target.value)
+  const numValue = parseDecimal(value)
+  
+  if (!isNaN(numValue) && numValue >= 0) {
+    formData.value.liters = numValue
+    // Berechne totalPrice neu
+    if (formData.value.pricePerLiter > 0) {
+      formData.value.totalPrice = Math.round(numValue * formData.value.pricePerLiter * 100) / 100
+    }
+  } else if (value === '' || value === null) {
+    formData.value.liters = 0
+  }
+}
+
+function handleTotalPriceInput(event) {
+  const value = normalizeDecimalInput(event.target.value)
+  const numValue = parseDecimal(value)
+  
+  if (!isNaN(numValue) && numValue >= 0) {
+    formData.value.totalPrice = numValue
+  } else if (value === '' || value === null) {
+    formData.value.totalPrice = 0
+  }
+}
+
 // Berechne totalPrice automatisch
 watch([() => formData.value.liters, () => formData.value.pricePerLiter], ([liters, pricePerLiter]) => {
-  if (liters > 0 && pricePerLiter > 0) {
+  if (typeof liters === 'number' && liters > 0 && pricePerLiter > 0) {
     formData.value.totalPrice = Math.round(liters * pricePerLiter * 100) / 100
   }
 })
@@ -298,6 +323,14 @@ async function handleSubmit() {
       ...(props.refuel || {}),
       ...formData.value,
       date: new Date(formData.value.date).toISOString()
+    }
+    
+    // Parse Dezimalwerte (können Strings mit Komma sein)
+    if (typeof refuelData.liters === 'string') {
+      refuelData.liters = parseDecimal(refuelData.liters) || 0
+    }
+    if (typeof refuelData.totalPrice === 'string') {
+      refuelData.totalPrice = parseDecimal(refuelData.totalPrice) || 0
     }
     
     await upsertRefuel(refuelData)

@@ -5,7 +5,56 @@ Alle wichtigen Änderungen an diesem Projekt werden in dieser Datei dokumentiert
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
-## [1.2.3] - 2025-11-16
+**Entwicklungszeitraum**: 14. November 2025 (Freitag, 17:00-22:00 Uhr) bis 17. November 2025 (Montag, 11:30 Uhr)
+
+## [1.3.1] - 2025-11-17 11:30
+
+### Geändert
+- GPS-Tracking optimiert: Nur Positionen mit ≤10m Genauigkeit werden verwendet, Tracking alle 60 Sekunden (statt kontinuierlich)
+- Live-Aktualisierung der Dauer (HH:MM:SS) und Strecke bei laufender Fahrt, wenn View sichtbar ist
+- Dezimaltrennzeichen-Normalisierung: Komma und Punkt werden in allen Formularen akzeptiert (intern zu Punkt konvertiert)
+- `formatDuration()` gibt jetzt immer HH:MM:SS Format zurück (auch bei 0 Stunden: "00:05:23")
+- `VehicleForm.vue`: Geschätzter Verbrauch akzeptiert jetzt Komma und Punkt als Dezimaltrennzeichen
+- `RefuelForm.vue`: Liter und Gesamtpreis akzeptieren jetzt Komma und Punkt als Dezimaltrennzeichen
+- `TripForm.vue`: Strecke akzeptiert jetzt Komma und Punkt als Dezimaltrennzeichen
+
+### Behoben
+- Geschwindigkeits-Tracking funktioniert korrekt (Durchschnitts- und Maximalgeschwindigkeit werden berechnet und gespeichert)
+- Live-Updates werden nur ausgeführt, wenn die View sichtbar ist (Performance-Optimierung)
+- Timer-Berechnung berücksichtigt Pausenzeit korrekt (`pausedDurationSeconds`)
+
+## [1.3.0] - 2025-11-17 11:00
+
+### Hinzugefügt
+- Neues View "Fahrten" (`TripsView.vue`) mit vollständiger GPS-Tracking-Funktionalität
+- Fahrten können erstellt, bearbeitet und gelöscht werden
+- GPS-Tracking mit automatischer Strecken- und Dauerberechnung (Haversine-Formel)
+- Start/Stop/Pause/Resume-Funktionalität für Fahrten
+- Geschwindigkeits-Tracking: Durchschnittsgeschwindigkeit (gleitender Durchschnitt) und Maximalgeschwindigkeit
+- Route-Tracking: GPS-Punkte werden als Array gespeichert (lat, lng, accuracy, speed, heading, timestamp)
+- Hinweis-Dialog vor Tracking-Start mit detaillierter Information über Tracking-Parameter (10m Genauigkeit, 60s Intervall, lokale Speicherung)
+- Automatische Berechtigungsanfrage für Geolocation vor Tracking-Start
+- `tripService.js` für GPS-Tracking, Timer-Verwaltung und Pausenzeit-Berechnung
+  - `startTrip()`, `stopTrip()`, `pauseTrip()`, `resumeTrip()`
+  - `getActiveTrip()`, `loadActiveTrip()`
+  - `formatDuration()`, `formatDistance()`
+- `TripList.vue` Komponente für Fahrten-Liste mit Status-Badges und Filterung
+- `TripForm.vue` Komponente für Erstellen/Bearbeiten von Fahrten
+- `trips` Store in IndexedDB (Version 4) mit Indizes für vehicleId, startDate, endDate, status
+- Storage Service erweitert: `loadTrips()`, `getTripsByVehicleId()`, `getTripById()`, `upsertTrip()`, `deleteTrip()`
+- Utility-Funktionen für Dezimaltrennzeichen-Normalisierung (`numberUtils.js`): `parseDecimal()`, `normalizeDecimalInput()`, `formatDecimal()`
+- Tab "Fahrten" in BottomNavBar mit Navigation-Icon (`PhNavigationArrow`)
+- Anzeige der Durchschnitts- und Maximalgeschwindigkeit in Fahrten-Liste und aktiver Fahrt
+- Live-Anzeige der Dauer und Strecke bei aktiver Fahrt
+
+### Geändert
+- IndexedDB Version von 3 auf 4 erhöht (für trips Store)
+- Router erweitert: Route `/trips` hinzugefügt
+- App-Start lädt automatisch aktive Fahrten und setzt Tracking fort (auch nach App-Neustart)
+- `logService.js`: DB_VERSION auf 4 erhöht (muss mit storageService.js übereinstimmen)
+- `App.vue`: Lädt aktive Fahrten beim Start und setzt GPS-Tracking fort
+
+## [1.2.3] - 2025-11-16 22:00
 
 ### Behoben
 - IndexedDB VersionError behoben: `logs` Store wird jetzt korrekt erstellt
@@ -13,18 +62,27 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Permissions Policy Verletzung behoben: Keine automatische Geolocation-Anfrage beim App-Start
 - Asset-Pfade (Manifest, Icons, Favicon) auf `/TankCopilot/app/` korrigiert
 - `checkLocationPermission()` ruft keine Geolocation mehr auf (nur Permissions API)
+- API-Endpunkt-Pfade korrigiert (API-Ordner zurück ins Root verschoben)
 
 ### Geändert
 - Berechtigungsprüfung beim App-Start: Nur Status prüfen, keine automatische Anfrage
 - Permissions Policy Meta-Tag hinzugefügt für explizite Geolocation-Erlaubnis
+- Code auf GitHub hochgeladen
 
-## [1.2.1] - 2025-11-15
+## [1.2.2] - 2025-11-16 14:00
+
+### Behoben
+- IndexedDB VersionError behoben: `logs` Store wird jetzt korrekt erstellt
+- Permissions Policy Verletzung behoben: Keine automatische Geolocation-Anfrage beim App-Start
+- Asset-Pfade (Manifest, Icons, Favicon) auf `/TankCopilot/app/` korrigiert
+
+## [1.2.1] - 2025-11-16 09:00
 
 ### Geändert
 - Impressum-Informationen in den Einstellungen hinzugefügt
 - Link zum vollständigen Impressum auf fluvento.de integriert
 
-## [1.2.0] - 2025-11-14
+## [1.2.0] - 2025-11-15 17:00
 
 ### Hinzugefügt
 - Berechtigungsverwaltung für Standort und Benachrichtigungen
@@ -41,25 +99,27 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Nominatim Reverse Geocoding gibt jetzt Hausnummern zurück
 - Adressformat: "Straße Hausnummer, PLZ, Stadt"
 
-## [1.1.3] - 2025-11-10
+## [1.1.3] - 2025-11-15 14:00
 
 ### Behoben
 - Navigation-Button funktioniert wieder korrekt
 - Konsistente Adressformatierung für Tankstellen
 
-## [1.1.2] - 2025-11-05
+## [1.1.2] - 2025-11-15 12:00
 
 ### Behoben
 - Android-Kompatibilität verbessert
 - Service Worker Update-Mechanismus optimiert
+- PWA-Subfolder-Konfiguration (`/TankCopilot/app/`) implementiert
 
-## [1.1.1] - 2025-11-01
+## [1.1.1] - 2025-11-15 10:00
 
 ### Behoben
 - iOS-Kompatibilität verbessert
 - PWA-Installation auf iOS optimiert
+- Service Worker Scope und Manifest-Pfade angepasst
 
-## [1.1.0] - 2025-10-25
+## [1.1.0] - 2025-11-15 09:00
 
 ### Hinzugefügt
 - Umfassendes Error-Handling-System (`errorHandler.php`)
@@ -91,33 +151,37 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - OpenRouteService API-Integration korrigiert
 - IndexedDB Schema-Updates funktionieren korrekt
 
-## [1.0.3] - 2025-10-15
+## [1.0.3] - 2025-11-14 22:00
 
 ### Hinzugefügt
 - Statusmeldungen während API-Aufrufen
 - Anzeige des aktuellen Standorts in der Tankstellensuche
 - Reverse Geocoding für Standortanzeige
+- Marketing/Sales-Website (`offer/index.html`) mit WCAG AA Compliance
 
 ### Geändert
 - Verbesserte Netzwerkstatus-Erkennung
 - UI-Feedback während API-Calls
+- CHANGELOG.md erstellt mit vollständiger Versionshistorie
 
-## [1.0.2] - 2025-10-10
+## [1.0.2] - 2025-11-14 21:00
 
 ### Behoben
 - Service Worker Konfiguration für Subfolder-Deployment
 - PWA-Caching-Strategien optimiert
 - Cache-Invalidierung bei Updates
+- PWA-Pfade auf `/TankCopilot/app/` angepasst
 
-## [1.0.1] - 2025-10-05
+## [1.0.1] - 2025-11-14 20:00
 
 ### Behoben
 - Tankerkönig API-Endpunkt korrigiert
 - API-Parameter-Namen angepasst (`radius` → `rad`)
 - Response-Parsing für Tankerkönig API verbessert
 - OpenRouteService Integration vollständig implementiert
+- CORS-Header korrekt konfiguriert
 
-## [1.0.0] - 2025-10-01
+## [1.0.0] - 2025-11-14 19:00
 
 ### Hinzugefügt
 - Erste stabile Release-Version
@@ -125,8 +189,9 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Offline-Unterstützung
 - Service Worker mit Workbox
 - iOS-spezifische Meta-Tags und Icons
+- Android-Kompatibilität
 
-## [0.5.0] - 2025-09-20
+## [0.5.0] - 2025-11-14 18:30
 
 ### Hinzugefügt
 - Station-Caching für reduzierte API-Aufrufe
@@ -137,7 +202,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - API-Aufrufe optimiert durch intelligentes Caching
 - Reduzierte Ladezeiten bei wiederholten Suchen
 
-## [0.4.0] - 2025-09-15
+## [0.4.0] - 2025-11-14 18:00
 
 ### Hinzugefügt
 - Reverse Geocoding-Endpoint (`api/reverse-geocode.php`)
@@ -149,7 +214,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Manuelle Standorteingabe unterstützt jetzt Adresssuche
 - Verbesserte Benutzerfreundlichkeit bei Standorteingabe
 
-## [0.3.0] - 2025-09-10
+## [0.3.0] - 2025-11-14 17:30
 
 ### Hinzugefügt
 - PWA-Manifest (`manifest.webmanifest`)
@@ -161,7 +226,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Build-Prozess für PWA optimiert
 - Vite PWA Plugin integriert
 
-## [0.2.0] - 2025-09-05
+## [0.2.0] - 2025-11-14 17:00
 
 ### Hinzugefügt
 - Tankerkönig API-Integration für Spritpreise
@@ -175,7 +240,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - API-Endpunkte für externe Services
 - Verbesserte Fehlerbehandlung bei API-Aufrufen
 
-## [0.1.0] - 2025-09-01
+## [0.1.0] - 2025-11-14 17:00
 
 ### Hinzugefügt
 - Initiale Projektstruktur
@@ -215,20 +280,22 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **Behoben**: Bug-Fixes
 - **Sicherheit**: Sicherheitsrelevante Änderungen
 
-[1.2.3]: https://github.com/fluvento/tankcopilot/compare/v1.2.1...v1.2.3
-[1.2.1]: https://github.com/fluvento/tankcopilot/compare/v1.2.0...v1.2.1
-[1.2.0]: https://github.com/fluvento/tankcopilot/compare/v1.1.3...v1.2.0
-[1.1.3]: https://github.com/fluvento/tankcopilot/compare/v1.1.2...v1.1.3
-[1.1.2]: https://github.com/fluvento/tankcopilot/compare/v1.1.1...v1.1.2
-[1.1.1]: https://github.com/fluvento/tankcopilot/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/fluvento/tankcopilot/compare/v1.0.3...v1.1.0
-[1.0.3]: https://github.com/fluvento/tankcopilot/compare/v1.0.2...v1.0.3
-[1.0.2]: https://github.com/fluvento/tankcopilot/compare/v1.0.1...v1.0.2
-[1.0.1]: https://github.com/fluvento/tankcopilot/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/fluvento/tankcopilot/compare/v0.5.0...v1.0.0
-[0.5.0]: https://github.com/fluvento/tankcopilot/compare/v0.4.0...v0.5.0
-[0.4.0]: https://github.com/fluvento/tankcopilot/compare/v0.3.0...v0.4.0
-[0.3.0]: https://github.com/fluvento/tankcopilot/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/fluvento/tankcopilot/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/fluvento/tankcopilot/releases/tag/v0.1.0
+[1.3.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.2.3...v1.3.0
+[1.2.3]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.2.1...v1.2.3
+[1.2.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.1.3...v1.2.0
+[1.1.3]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.1.2...v1.1.3
+[1.1.2]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.1.1...v1.1.2
+[1.1.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.0.3...v1.1.0
+[1.0.3]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.0.2...v1.0.3
+[1.0.2]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v0.5.0...v1.0.0
+[0.5.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/Fluvento-Solutions/TankCopilot/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/Fluvento-Solutions/TankCopilot/releases/tag/v0.1.0
 

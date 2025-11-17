@@ -60,6 +60,19 @@ onMounted(async () => {
         console.debug('Berechtigungsstatus konnte nicht geprüft werden:', error)
       }
     }
+
+    // Lade aktive Fahrt beim App-Start
+    try {
+      const { loadTrips } = await import('./services/storageService')
+      const { loadActiveTrip } = await import('./services/tripService')
+      const trips = await loadTrips()
+      const activeTrip = trips.find(t => t.status === 'active' || t.status === 'paused')
+      if (activeTrip) {
+        await loadActiveTrip(activeTrip.id)
+      }
+    } catch (error) {
+      console.debug('Keine aktive Fahrt gefunden oder Fehler beim Laden:', error)
+    }
   } catch (error) {
     console.error('Fehler beim Prüfen der Berechtigungen:', error)
   }

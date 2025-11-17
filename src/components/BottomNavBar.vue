@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { PhChartBarHorizontal as ChartBar, PhCar as Car, PhGasPump as GasPump, PhMapPin as MapPin } from '@phosphor-icons/vue'
+import { PhChartBarHorizontal as ChartBar, PhCar as Car, PhGasPump as GasPump, PhMapPin as MapPin, PhNavigationArrow as Navigation } from '@phosphor-icons/vue'
 
 const navItems = [
   {
@@ -43,6 +43,12 @@ const navItems = [
     routeName: 'refuel-log',
     icon: GasPump,
     label: 'Tankbuch'
+  },
+  {
+    route: '/trips',
+    routeName: 'trips',
+    icon: Navigation,
+    label: 'Fahrten'
   },
   {
     route: '/plan-refuel',

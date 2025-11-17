@@ -6,12 +6,13 @@
  * - Store: 'refuels' - Tankvorgänge
  * - Store: 'settings' - Einstellungen
  * - Store: 'logs' - Protokolle
+ * - Store: 'trips' - Fahrten
  */
 
 import { logInfo, logWarn, logError } from './logService'
 
 const DB_NAME = 'TankCopilotDB'
-const DB_VERSION = 3 // Erhöht um logs Store zu erstellen
+const DB_VERSION = 4 // Erhöht um trips Store zu erstellen
 
 let db = null
 
@@ -61,6 +62,15 @@ function openDB() {
         const logStore = database.createObjectStore('logs', { keyPath: 'id', autoIncrement: true })
         logStore.createIndex('timestamp', 'timestamp', { unique: false })
         logStore.createIndex('level', 'level', { unique: false })
+      }
+
+      // Trips Store (für Fahrten-Tracking)
+      if (!database.objectStoreNames.contains('trips')) {
+        const tripStore = database.createObjectStore('trips', { keyPath: 'id' })
+        tripStore.createIndex('vehicleId', 'vehicleId', { unique: false })
+        tripStore.createIndex('startDate', 'startDate', { unique: false })
+        tripStore.createIndex('endDate', 'endDate', { unique: false })
+        tripStore.createIndex('status', 'status', { unique: false })
       }
     }
   })
@@ -757,6 +767,136 @@ export async function deleteSettings(keys) {
     })
   } catch (error) {
     logError('Fehler beim Löschen der Einstellungen', { error: error.message, keys })
+    throw error
+  }
+}
+
+// ==================== TRIPS ====================
+
+/**
+ * Lädt alle Fahrten
+ */
+export async function loadTrips() {
+  try {
+    const database = await openDB()
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(['trips'], 'readonly')
+      const store = transaction.objectStore('trips')
+      const request = store.getAll()
+
+      request.onsuccess = () => {
+        const trips = request.result || []
+        // Sortiere nach Startdatum absteigend
+        trips.sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+        resolve(trips)
+      }
+      request.onerror = () => reject(request.error)
+    })
+  } catch (error) {
+    console.error('Fehler beim Laden der Fahrten:', error)
+    return []
+  }
+}
+
+/**
+ * Holt alle Fahrten für ein Fahrzeug
+ */
+export async function getTripsByVehicleId(vehicleId) {
+  try {
+    const database = await openDB()
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(['trips'], 'readonly')
+      const store = transaction.objectStore('trips')
+      const index = store.index('vehicleId')
+      const request = index.getAll(vehicleId)
+
+      request.onsuccess = () => {
+        const trips = request.result || []
+        trips.sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+        resolve(trips)
+      }
+      request.onerror = () => reject(request.error)
+    })
+  } catch (error) {
+    console.error('Fehler beim Laden der Fahrten:', error)
+    return []
+  }
+}
+
+/**
+ * Holt eine Fahrt nach ID
+ */
+export async function getTripById(id) {
+  try {
+    const database = await openDB()
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(['trips'], 'readonly')
+      const store = transaction.objectStore('trips')
+      const request = store.get(id)
+
+      request.onsuccess = () => resolve(request.result || null)
+      request.onerror = () => reject(request.error)
+    })
+  } catch (error) {
+    console.error('Fehler beim Laden der Fahrt:', error)
+    return null
+  }
+}
+
+/**
+ * Fügt eine Fahrt hinzu oder aktualisiert sie
+ */
+export async function upsertTrip(trip) {
+  try {
+    const database = await openDB()
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(['trips'], 'readwrite')
+      const store = transaction.objectStore('trips')
+      
+      const now = new Date().toISOString()
+      if (!trip.id) {
+        trip.id = generateId()
+        trip.createdAt = now
+      }
+      trip.updatedAt = now
+
+      const request = store.put(trip)
+
+      request.onsuccess = () => {
+        window.dispatchEvent(new CustomEvent('dataChanged', {
+          detail: { type: 'trip', action: trip.id ? 'update' : 'create', data: trip }
+        }))
+        resolve(trip)
+      }
+      request.onerror = () => reject(request.error)
+    })
+  } catch (error) {
+    console.error('Fehler beim Speichern der Fahrt:', error)
+    throw error
+  }
+}
+
+/**
+ * Löscht eine Fahrt
+ */
+export async function deleteTrip(id) {
+  try {
+    const database = await openDB()
+    return new Promise((resolve, reject) => {
+      const transaction = database.transaction(['trips'], 'readwrite')
+      const store = transaction.objectStore('trips')
+      const request = store.delete(id)
+
+      request.onsuccess = () => {
+        window.dispatchEvent(new CustomEvent('dataChanged', {
+          detail: { type: 'trip', action: 'delete', id }
+        }))
+        resolve()
+      }
+      request.onerror = () => reject(request.error)
+    })
+  } catch (error) {
+    console.error('Fehler beim Löschen der Fahrt:', error)
     throw error
   }
 }

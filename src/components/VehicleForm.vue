@@ -59,12 +59,11 @@
       <div class="form-group">
         <label class="form-label">Geschätzter Verbrauch (L/100km)</label>
         <input
-          v-model.number="formData.estimatedConsumptionLPer100km"
-          type="number"
+          v-model="formData.estimatedConsumptionLPer100km"
+          type="text"
           class="form-input"
-          placeholder="z.B. 7.5"
-          min="0"
-          step="0.1"
+          placeholder="z.B. 7.5 oder 7,5"
+          @input="handleConsumptionInput"
         />
         <div class="form-hint">
           Optional: Geschätzter Verbrauch für Fahrtkosten-Berechnung. Wird automatisch durch echte Verbrauchsdaten ersetzt, sobald genug Tankvorgänge vorhanden sind.
@@ -95,6 +94,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { upsertVehicle } from '../services/storageService'
+import { parseDecimal, normalizeDecimalInput } from '../utils/numberUtils'
 
 const props = defineProps({
   vehicle: {
@@ -133,6 +133,20 @@ watch(() => props.vehicle, (newVehicle) => {
   }
 }, { immediate: true })
 
+function handleConsumptionInput(event) {
+  const value = normalizeDecimalInput(event.target.value)
+  const numValue = parseDecimal(value)
+  
+  if (!isNaN(numValue) && numValue > 0) {
+    formData.value.estimatedConsumptionLPer100km = numValue
+  } else if (value === '' || value === null) {
+    formData.value.estimatedConsumptionLPer100km = null
+  } else {
+    // Behalte den String-Wert für die Anzeige, wird beim Submit geparst
+    formData.value.estimatedConsumptionLPer100km = value
+  }
+}
+
 async function handleSubmit() {
   try {
     const vehicleData = {
@@ -145,8 +159,11 @@ async function handleSubmit() {
       vehicleData.currentOdometerKm = null
     }
     
-    // Stelle sicher, dass estimatedConsumptionLPer100km null ist, wenn leer
-    if (vehicleData.estimatedConsumptionLPer100km === '' || vehicleData.estimatedConsumptionLPer100km === undefined || vehicleData.estimatedConsumptionLPer100km <= 0) {
+    // Parse estimatedConsumptionLPer100km (kann String mit Komma sein)
+    if (typeof vehicleData.estimatedConsumptionLPer100km === 'string') {
+      const parsed = parseDecimal(vehicleData.estimatedConsumptionLPer100km)
+      vehicleData.estimatedConsumptionLPer100km = (!isNaN(parsed) && parsed > 0) ? parsed : null
+    } else if (vehicleData.estimatedConsumptionLPer100km === '' || vehicleData.estimatedConsumptionLPer100km === undefined || vehicleData.estimatedConsumptionLPer100km <= 0) {
       vehicleData.estimatedConsumptionLPer100km = null
     }
     

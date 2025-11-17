@@ -5,6 +5,7 @@ import RefuelLogView from '../views/RefuelLogView.vue'
 import PlanRefuelView from '../views/PlanRefuelView.vue'
 import SettingsView from '../views/SettingsView.vue'
 import ShareView from '../views/ShareView.vue'
+import TripsView from '../views/TripsView.vue'
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/plan-refuel',
     name: 'plan-refuel',
     component: PlanRefuelView
+  },
+  {
+    path: '/trips',
+    name: 'trips',
+    component: TripsView
   },
   {
     path: '/settings',

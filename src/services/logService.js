@@ -6,7 +6,7 @@
 
 // Verwende die gleiche DB wie storageService
 const DB_NAME = 'TankCopilotDB'
-const DB_VERSION = 3 // Muss mit storageService.js übereinstimmen
+const DB_VERSION = 4 // Muss mit storageService.js übereinstimmen
 const LOG_STORE = 'logs'
 const MAX_LOGS = 1000 // Maximale Anzahl Logs (Rotation)
 
